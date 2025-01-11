@@ -1,0 +1,171 @@
+<br />
+<h2 class="text-info">Stock market average calculator</h2>
+<br>
+<div class="container">
+
+
+
+    <div class="row">
+        <div class="col-xs-3 col-lg-3">
+            <div class="row">
+                <h4>First Purchase</h4>
+                <hr style="width:96%">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputUnit1">Units</label>
+                <input type="number" class="form-control inputmargin3" #txtUnit1 placeholder="Enter Unit"
+                    [(ngModel)]='Unit1'
+                    (focusout)="getData(txtUnit1.value,txtpricePerShare1.value,txtUnit2.value,txtpricePerShare2.value)">
+            </div>
+
+            <div class="form-group" style="margin-top:15px;">
+                <label for="lblPriceperShare">Price per share</label>
+                <input type="number" class="form-control inputmargin3" #txtpricePerShare1 placeholder="Enter Share"
+                    [(ngModel)]="SharePrize1"
+                    (focusout)="getData(txtUnit1.value,txtpricePerShare1.value,txtUnit2.value,txtpricePerShare2.value)">
+            </div>
+
+            <ng-container *ngIf="showCal">
+                <div class="row">
+                    <hr style="color:#198754;width:98%; margin-top: 10px;">
+                    <div class="col-xs-3 xol-lg-3">
+                        <h5 style="text-align: right;">
+                            <span class="spanstyle">Amount invested on 1st buy : </span>
+                            <span class="spanstyle">{{Amount1Invested}}</span>
+                        </h5>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+
+        <div class="col-xs-3 col-lg-3">
+            <div class="row">
+                <h4>Second Purchase</h4>
+                <hr style="width:96%">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputUnit2">Units</label>
+                <input type="number" class="form-control inputmargin3" #txtUnit2 placeholder="Enter Unit"
+                    [(ngModel)]="Unit2"
+                    (focusout)="getData(txtUnit1.value,txtpricePerShare1.value,txtUnit2.value,txtpricePerShare2.value)">
+            </div>
+            <div class="form-group" style="margin-top:15px;">
+                <label for="lblPriceperShare2">Price per share</label>
+                <input type="number" class="form-control inputmargin3" #txtpricePerShare2 placeholder="Enter Share"
+                    [(ngModel)]="SharePrize2"
+                    (focusout)="getData(txtUnit1.value,txtpricePerShare1.value,txtUnit2.value,txtpricePerShare2.value)">
+                <!-- 
+                <input type="number" class="form-control inputmargin3" #txtpricePerShare2 placeholder="Enter Share"
+                    [(ngModel)]="SharePrize2"> -->
+
+            </div>
+            <ng-container *ngIf="showCal">
+                <div class="row">
+                    <hr style="color:#198754;width:98%; margin-top: 10px;">
+                    <div class="col-xs-3 xol-lg-3">
+                        <h5 style="text-align: right;">
+                            <span class="spanstyle">Amount invested on 2nd buy : </span>
+                            <span class="spanstyle">{{Amount2Invested}}</span>
+                        </h5>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+
+        <ng-container *ngIf="AutoAvgDiv">
+            <div class="col-xs-3 col-lg-3">
+                <div class="row">
+                    <h4>Auto Average</h4>
+                    <hr style="width:96%">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputUnit2">Required Units</label>
+                    <input type="number" class="form-control inputmargin3"
+                        id="txtUnit3" #txtUnit3
+                         placeholder="Enter Unit"
+                        [(ngModel)]="Unit3"
+                        (focusout)="getAutoAverageData(txtUnit1.value,txtpricePerShare1.value,txtUnit3.value,txtpricePerShare3.value)">
+                </div>
+                <div class="form-group" style="margin-top:15px;">
+                    <label for="lblPriceperShare2">Price per share</label>
+                    <input type="number" class="form-control inputmargin3" id="txtpricePerShare3"
+                        placeholder="Enter Share"  #txtpricePerShare3
+                        [(ngModel)]="SharePrize3"
+                        (focusout)="getAutoAverageData(txtUnit1.value,txtpricePerShare1.value,txtUnit3.value,txtpricePerShare3.value)"                       >
+                </div>
+                <div class="row">
+                    <hr style="color:#198754;width:98%; margin-top: 10px;">
+                    <div class="col-xs-3 xol-lg-3">
+                        <h5 style="text-align: right;">
+                            <span class="spanstyle">Required Amount Average For: </span>
+                            <span class="spanstyle">{{Amount3Invested}}</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <br>
+    <ng-container *ngIf="showCal">
+        <div class="row">
+            <div class="col-xs-6 col-lg-6">
+                <h5>
+                    <span style="color: #198754;"> Total Units : </span>
+                    <span><b> {{TotalUnit}} </b></span>
+                </h5>
+                <h5>
+                    <span style="color: #198754;"> Average Prize : </span>
+                    <span><b> {{AveragePrize}} </b></span>
+                </h5>
+                <h5>
+                    <span style="color: #198754;"> Total Amount : </span>
+                    <span><b> {{TotalAmount}} </b></span>
+                </h5>
+            </div>
+            <ng-container *ngIf="AutoAvgDivTotal">
+                <div class="col-xs-6 col-lg-6" id="">
+                    <h5>
+                        <span style="color: #198754;">(AA) Total Units : </span>
+                        <span><b> {{AutoAverageTotalUnit}} </b></span>
+                    </h5>
+                    <h5>
+                        <span style="color: #198754;">(AA) Average Prize : </span>
+                        <span><b> {{AutoAveragePrize}} </b></span>
+                    </h5>
+                    <h5>
+                        <span style="color: #198754;">(AA) Total Amount : </span>
+                        <span><b> {{AutoAverageTotalAmount}} </b></span>
+                    </h5>
+                </div>
+            </ng-container>
+
+        </div>
+    </ng-container>
+
+
+    <br />
+
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group " role="group">
+            <button type="button"
+                (click)="getData(txtUnit1.value,txtpricePerShare1.value,txtUnit2.value,txtpricePerShare2.value)"
+                class="btn btn-success btn-sm"> Cal Average</button>
+
+            <button type="button" (click)="clearField()" style="margin-left: 10px;" class="btn btn-primary btn-sm">Clear
+                Fields</button>
+
+            <button type="button"
+                (click)="AutoAverageService(txtUnit1.value,txtpricePerShare1.value,txtUnit2.value,txtpricePerShare2.value)"
+                style="margin-left: 10px;" [hidden]="AutoAvgButton" class="btn btn-primary btn-sm">Auto
+                Avg</button>
+        </div>
+    </div>
+
+
+
+
+
+</div>

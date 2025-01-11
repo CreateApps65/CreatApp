@@ -1,0 +1,16 @@
+.inputmargin3 {
+margin-top: 3px;
+text-align: right;
+}
+
+input[type="number"]::placeholder {
+             
+    /* Firefox, Chrome, Opera */
+    text-align: left;
+}
+
+.spanstyle{
+    padding-right: 12px;
+    font-size: 15px;
+    color: green;
+}
